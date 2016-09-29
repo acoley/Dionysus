@@ -1,0 +1,62 @@
+<%= form_for(@restaurant) do |f| %>
+  <% if @restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+      <ul>
+      <% @restaurant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :phone_number %><br>
+    <%= telephone_field(:restaurant, :phone_number) %>
+  </div>
+
+  <div>
+    <%= f.label :url %><br>
+    <%= url_field(:restaurant, :url) %>
+  </div>
+
+  <div>
+    <%= f.label :menu %><br>
+    <%= url_field(:restaurant, :menu) %>
+  </div>
+
+  <div>
+    <%= f.label :specials %><br>
+    <%= url_field(:restaurant, :specials) %>
+  </div>
+
+  <div> 
+    <%= f.check_box :takeout %>
+    <%= f.label :takeout %> <br/>
+    <%= f.check_box :delivery %>
+    <%= f.label :delivery %> <br/>
+    <%= f.check_box :drive %>
+    <%= f.label :drive %> <br/>
+    <%= f.check_box :dinein %>
+    <%= f.label :dinein %> <br/>
+  </div>
+
+  <div>
+    <%= f.label :cuisine %><br>
+    <%= f.collection_select(:cuisine_id, Cuisine.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
