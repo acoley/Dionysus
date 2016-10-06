@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'sessions/login'
+
+  get 'sessions/home'
+
+  get 'sessions/profile'
+
+  get 'sessions/setting'
+
   resources :opinions
 
   resources :restaurants
@@ -17,6 +25,14 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  #root :to => "sessions#login"
+  match "signup", :to => "users#new", via: [:get, :post]
+  match "login", :to => "sessions#login", via: [:get, :post]
+  match "login_attempt", :to => "sessions#login_attempt", via: [:get, :post]
+  match "logout", :to => "sessions#logout", via: [:get, :post]
+  match "home", :to => "sessions#home", via: [:get, :post]
+  match "profile", :to => "sessions#profile", via: [:get, :post]
+  match "setting", :to => "sessions#setting", via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
